@@ -6,9 +6,10 @@ define jenkins::sysconfig ( $value ) {
   }
 
   file_line { "Jenkins sysconfig setting ${name}":
-    path  => "${path}/jenkins",
-    line  => "JENKINS_${name}=\"${value}\"",
-    match => "^JENKINS_${name}=",
+    path   => "${path}/jenkins",
+    line   => "${name}=\"${value}\"",
+    match  => "^${name}=",
+    notify => Service["jenkins"],
   }
 }
 
